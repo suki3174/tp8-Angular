@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { Category } from '../../model/category';
-import { ControlContainer, FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { ControlContainer, Form, FormArray,  FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { GameService } from '../../services/game.service';
 import { Game } from '../../model/game';
 import { JsonPipe } from '@angular/common';
@@ -39,7 +39,8 @@ this.gameForm=this.formBuilder.nonNullable.group({
   price:[0],
   madeIn:['Tunisie'],
   category:[Category.BoardGames],
-  isNew:[true]
+  isNew:[true],
+  shops:this.formBuilder.array([])
 })
 this.gameForm.get('name')?.valueChanges.subscribe(
   (value)=>console.log(value)
@@ -49,6 +50,12 @@ this.gameForm.get('name')?.valueChanges.subscribe(
       console.log(data)}
   )
  
+}
+public get gameShops(){
+  return this.gameForm.get('shops') as FormArray;
+}
+onAddShop(){
+  this.gameShops.push(this.formBuilder.control(''));
 }
 
 onSubmit(){
@@ -78,6 +85,7 @@ this.gameForm.reset();
 this.gameForm.get('id')?.setValue(this.games.length+1);
 this.gameForm.get('madeIn')?.setValue("Autre");
 this.gameForm.get('category')?.setValue(Category.CardGames);
+this.gameShops.clear();
 }
 
 }

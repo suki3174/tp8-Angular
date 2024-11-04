@@ -37,10 +37,21 @@
                 <input  type="checkbox" name="isNew" formControlName="isNew"> Nouveau
             </label>
         </div>
+        <h3>Définition des point de vente</h3>
+        <div formArrayName="shops">
+            @for(shop of gameShops.controls;track $index; let indice=$index){
+                <div>
+                    <label for="">Point de vente num {{indice+1}}</label>
+                    <input type="text" [formControlName]="indice">
+                </div>
+            }
+            <button type="button" (click)="onAddShop()" class="btn btn-sm btn-secondary">Ajouter point de vente</button>
+        </div>
+
 
         <input type="submit"  value="Ajouter">
         <input type="button" value="Effacer" (click)="onResetForm()">
-
+       
     </form>
     {{games | json}}
 </div>
