@@ -11,6 +11,30 @@
         "Tunis",
         "Sousse"
       ]
+    },
+    {
+      "id": 2,
+      "name": "echec",
+      "price": 46.3,
+      "madeIn": "Tunisie",
+      "category": "Jeux de société",
+      "isNew": true
+    },
+    {
+      "id": 3,
+      "name": "echec",
+      "price": 46.3,
+      "madeIn": "Tunisie",
+      "category": "Jeux de société",
+      "isNew": true
+    },
+    {
+      "id": 4,
+      "name": "echec",
+      "price": 46.3,
+      "madeIn": "Tunisie",
+      "category": "Jeux de société",
+      "isNew": true
     }
   ]
 }
