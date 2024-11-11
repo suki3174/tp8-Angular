@@ -17,6 +17,16 @@
         "poste": "PDG",
         "departement": "Finance"
       }
+    },
+    {
+      "id": "c502",
+      "matricule": "matricule",
+      "name": "name",
+      "departement": "TI",
+      "poste": "Secrétaire",
+      "diplomes": [
+        2000
+      ]
     }
   ]
 }

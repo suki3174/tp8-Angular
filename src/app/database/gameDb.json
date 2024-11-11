@@ -59,6 +59,14 @@
       "madeIn": "Autre",
       "category": "Jeux de cartes",
       "isNew": true
+    },
+    {
+      "id": 8,
+      "name": "",
+      "price": 0,
+      "madeIn": "Tunisie",
+      "category": "Jeux de société",
+      "isNew": true
     }
   ]
 }

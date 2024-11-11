@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { Category } from '../../model/category';
-import { ControlContainer, Form, FormArray,  FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { ControlContainer, Form, FormArray,  FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { GameService } from '../../services/game.service';
 import { Game } from '../../model/game';
 import { JsonPipe } from '@angular/common';
@@ -35,10 +35,10 @@ formBuilder:FormBuilder=inject(FormBuilder);
 ngOnInit(): void {
 this.gameForm=this.formBuilder.nonNullable.group({
   id:[1],
-  name:[''],
-  price:[0],
+  name:['',[Validators.required,Validators.pattern('[A-Z](.)+')]],
+  price:[0,[Validators.required,Validators.min(0.1)]],
   madeIn:['Tunisie'],
-  category:[Category.BoardGames],
+  category:[Category.BoardGames,Validators.required],
   isNew:[true],
   shops:this.formBuilder.array([])
 })
@@ -54,8 +54,22 @@ this.gameForm.get('name')?.valueChanges.subscribe(
 public get gameShops(){
   return this.gameForm.get('shops') as FormArray;
 }
+get name(){
+  return this.gameForm.get('name');
+}
+get price(){
+  return this.gameForm.get('price');
+}
+
+priceInvalid(){
+  return this.gameForm.get('price')?.errors?.['min'] && this.gameForm.get('price')?.dirty;
+}
+
 onAddShop(){
-  this.gameShops.push(this.formBuilder.control(''));
+  this.gameShops.push(this.formBuilder.control('',[Validators.required,Validators.pattern('(.)(.)+')]));
+}
+onValider(id:number){
+  return this.gameShops.controls[id]?.invalid && this.gameShops.controls[id]?.dirty;
 }
 
 onSubmit(){

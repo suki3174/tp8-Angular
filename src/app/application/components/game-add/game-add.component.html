@@ -9,10 +9,24 @@
             <label>Nom</label>
             <input class="form-control" type="text"  name="name" formControlName="name">
         </div>
+        @if(name?.invalid && name?.dirty){
+        <div class="alert alert-danger">
+            le nom doit commancer par une majuscule
+        </div>}
         <div>
             <label>Prix</label>
             <input class="form-control" type="number" name="price" formControlName="price">
         </div>
+        @if(priceInvalid()){
+            <div class="alert alert-danger">
+                le prix doit etre superieur a 0.1
+            </div>}
+        @else if(price?.touched && price?.errors?.['required']){
+            <div class="alert alert-danger">
+                le prix est obligatoire
+            </div>
+        }
+        
 
         <div>
             <label> Made In </label>
@@ -44,13 +58,19 @@
                     <label for="">Point de vente num {{indice+1}}</label>
                     <input type="text" [formControlName]="indice">
                 </div>
+                @if(onValider(indice)){
+                    <div class="alert alert-danger">
+                        doit contenir aumoin 2 catartères
+                    </div>
+
+                }
             }
             <button type="button" (click)="onAddShop()" class="btn btn-sm btn-secondary">Ajouter point de vente</button>
         </div>
 
 
-        <input type="submit"  value="Ajouter">
-        <input type="button" value="Effacer" (click)="onResetForm()">
+        <input type="submit"  value="Ajouter" class="btn btn-success " [disabled]="gameForm.invalid">
+        <input type="button" value="Effacer" class="btn btn-warning" (click)="onResetForm()">
        
     </form>
     {{games | json}}
